@@ -92,6 +92,14 @@
 <!--                <configuration>-->
 <!--                    <rerunFailingTestsCount>2</rerunFailingTestsCount>-->
 <!--                </configuration>-->
+<!--                <configuration>-->
+<!--                    <includes>-->
+<!--                        <include>extension.SimpleTest</include>-->
+<!--                    </includes>-->
+<!--                    <systemProperties>-->
+<!--                        <selenium.url>https://training360.com</selenium.url>-->
+<!--                    </systemProperties>-->
+<!--                </configuration>-->
 
             </plugin>
         </plugins>

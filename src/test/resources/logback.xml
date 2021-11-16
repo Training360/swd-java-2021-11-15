@@ -13,6 +13,6 @@
         <appender-ref ref="CONSOLE"/>
     </root>
 
-    <logger name="simple" level="error" />
+    <logger name="extension" level="debug" />
 
 </configuration>
