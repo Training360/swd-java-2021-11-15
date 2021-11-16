@@ -4,8 +4,11 @@ import extension.SeleniumTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.net.URL;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -34,5 +37,23 @@ class WelcomeTest {
         // find element meghívható bármilyen WebElement kontextusában
 
         assertEquals("This is a paragraph in a div.", p.getText());
+    }
+
+    @Test
+    void testListItems(WebDriver driver, URL url) {
+        driver.get(url + "/welcome");
+
+        var items = driver.findElements(By.tagName("li"));
+
+//        var cookies = List.of("Pogácsa", "Kakaóscsiga", "Muffin");
+//        for (int i = 0; i < items.size(); i++) {
+//            assertEquals(cookies.get(i), items.get(i).getText());
+//        }
+
+//        assertEquals(List.of("Pogácsa", "Kakaóscsiga", "Muffin"),
+//                items.stream().map(WebElement::getText).toList());
+
+        assertEquals(List.of("Pogácsa", "Kakaócsiga", "Muffin"),
+                items.stream().map(WebElement::getText).collect(Collectors.toList()));
     }
 }
