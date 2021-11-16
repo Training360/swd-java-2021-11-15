@@ -1,0 +1,15 @@
+h1 {
+    font-size: 14px;
+}
+
+.red {
+    color: #ff0000;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+#email-input {
+    border: 1px solid #00ff00;
+}
