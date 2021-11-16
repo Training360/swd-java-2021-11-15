@@ -1,5 +1,6 @@
 package simple;
 
+import io.github.artsok.RepeatedIfExceptionsTest;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
@@ -53,6 +54,7 @@ class SimpleFixtureTest {
     }
 
     @Test
+//    @RepeatedIfExceptionsTest(repeats = 3)
     void testHeader() {
         log.info("Test header");
 
