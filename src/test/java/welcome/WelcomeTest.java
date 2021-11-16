@@ -10,7 +10,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SeleniumTest
 class WelcomeTest {
@@ -53,7 +55,18 @@ class WelcomeTest {
 //        assertEquals(List.of("Pogácsa", "Kakaóscsiga", "Muffin"),
 //                items.stream().map(WebElement::getText).toList());
 
-        assertEquals(List.of("Pogácsa", "Kakaócsiga", "Muffin"),
-                items.stream().map(WebElement::getText).collect(Collectors.toList()));
+//        assertEquals(List.of("Pogácsa", "Kakaócsiga", "Muffin"),
+//                items.stream().map(WebElement::getText).collect(Collectors.toList()));
+
+        assertThat(items)
+                .extracting(WebElement::getText)
+//                .containsExactly("Pogácsa", "Kakaóscsiga", "Muffin");
+                .containsExactlyInAnyOrder("Pogácsa", "Kakaócsiga", "Muffin");
+
+        var message = "Hewllo World";
+//        assertTrue(message.startsWith("Hello"));
+
+        assertThat(message)
+                .startsWith("Hello");
     }
 }
