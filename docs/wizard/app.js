@@ -1,5 +1,5 @@
 window.onload = function() {    
-    const s = moment(new Date()).format('YYYY-MM-DD HH:MM:SS');
+    const s = moment(new Date()).format('YYYY-MM-DD hh:mm:ss');
     document.querySelector("#datetime-div").innerHTML = s;
 
     let counter = localStorage.getItem("counter");
