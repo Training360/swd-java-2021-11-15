@@ -1,6 +1,7 @@
 package locations;
 
 import extension.SeleniumTest;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -34,6 +35,18 @@ class LocationsTest {
             .enterLocationData()
             .clickOnSubmitButton()
             .messageIs("Location has been created");
+    }
+
+    @Test
+    // @RepeatedTest(10)
+    void testEdit(WebDriver driver) {
+        new LocationPage(driver)
+                .go()
+                .clickOnFirstEditButton()
+                .enterLocationDataToModify()
+                .clickOnModifySubmitButton()
+                .messageIs("Location has been modified");
+
     }
 
 
