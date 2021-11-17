@@ -1,0 +1,38 @@
+version: "3"
+services:
+  selenium-hub:
+    image: selenium/hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+
+  chrome:
+    image: selenium/node-chrome
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - "5900:5900"
+    privileged: true
+
+  chrome_video:
+    image: selenium/video:ffmpeg-4.3.1-20210527
+    volumes:
+      - ./videos:/videos
+    depends_on:
+      - chrome
+    environment:
+      - DISPLAY_CONTAINER_NAME=chrome
+      - FILE_NAME=chrome_video.mp4
+
+  intro-tests:
+    image: intro-tests
+    entrypoint: ["./mvnw", "-Dtraining.selenium.url=http://sut-samples", "-Dtraining.selenium.driver=RemoteWebDriver", "-Dtraining.selenium.hub=http://selenium-hub:4444", "test"]
+    depends_on:
+      - chrome

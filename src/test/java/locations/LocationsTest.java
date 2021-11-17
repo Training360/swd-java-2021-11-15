@@ -7,11 +7,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mariadb.jdbc.MariaDbDataSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.springframework.jdbc.core.JdbcTemplate;
 
+import javax.sql.DataSource;
 import java.net.URL;
+import java.sql.SQLException;
 
+import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SeleniumTest
@@ -31,7 +36,37 @@ class LocationsTest {
 //    }
 
     @Test
-    void testCreate(WebDriver driver) {
+    void testCreate(WebDriver driver) throws SQLException {
+//        var dataSource = new MariaDbDataSource("localhost", 3306, "locations");
+//        dataSource.setUser("locations");
+//        dataSource.setPassword("locations");
+//
+//        var jdbcTemplate = new JdbcTemplate(dataSource);
+//        jdbcTemplate.execute("delete from tag");
+//        jdbcTemplate.execute("delete from location");
+
+        delete("/api/locations")
+                .then()
+                .statusCode(204);
+
+        String json = "{\n" +
+                "                             \"name\": \"Budapest\",\n" +
+                "                             \"coords\": \"47.497912,19.040235\",\n" +
+                "                           }";
+
+        given()
+                .body("""
+                        {
+                             "name": "Budapest",
+                             "coords": "47.497912,19.040235",
+                           }
+                        """)
+                        .when()
+                                .post("/api/locations")
+                                        .then()
+                                                .statusCode(201);
+
+
         new LocationPage(driver)
             .go()
             .clickOnCreateLocation()
