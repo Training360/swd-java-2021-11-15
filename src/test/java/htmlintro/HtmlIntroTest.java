@@ -54,8 +54,8 @@ class HtmlIntroTest {
         // Then
         //var text = input.getText(); // Nem működik
         //var text = input.getAttribute("value");  // Működik, de megtévesztő az elnevezése
-        var text = input.getDomAttribute("value"); // Jó az elnevezés, de üres értéket ad vissza
-//        var text = input.getDomProperty("value");
+//        var text = input.getDomAttribute("value"); // Jó az elnevezés, de üres értéket ad vissza
+        var text = input.getDomProperty("value");
 
         assertEquals("example@example.com", text);
     }

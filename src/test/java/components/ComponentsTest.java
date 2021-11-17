@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SeleniumTest
@@ -33,13 +34,20 @@ public class ComponentsTest {
         var select = new Select(driver.findElement(By.id("dropdown")));
         select.getOptions().forEach(e -> System.out.println(e.getText()));
         select.selectByIndex(2);
-
         assertEquals("Option 3", select.getFirstSelectedOption().getText());
+
+
+        var multiSelect = new Select(driver.findElement(By.id("multi-select")));
+        multiSelect.selectByIndex(0);
+        multiSelect.selectByIndex(2);
+
+        assertThat(multiSelect.getAllSelectedOptions())
+                .extracting(WebElement::getText)
+                .containsExactly("Option 1", "Option 3");
 
         var password = driver.findElement(By.name("password"));
         password.sendKeys("password");
-
-        assertEquals("", password.getText());
+        assertEquals("password", password.getDomProperty("value"));
     }
 
 
