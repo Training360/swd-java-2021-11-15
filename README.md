@@ -18,3 +18,8 @@ java -cp junit-platform-console-standalone-1.8.1.jar;intro-tests-1.0-SNAPSHOT-te
 Ha viszont mindet egy jar-ba szeretnétek csomagolni, akkor
 Maven Assembly Plugint kell használni:
 
+## Locations application
+
+```shell
+docker compose up
+```

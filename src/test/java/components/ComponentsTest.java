@@ -1,7 +1,9 @@
 package components;
 
+import extension.DoComponentsTest;
 import extension.SeleniumTest;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +22,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ComponentsTest {
 
     @Test
+    @Tag("functional")
+    @Tag("e2e")
+    @Tag("regression")
+    @Tag("issue-567")
+    @Tag("spring-3")
+    @DoComponentsTest
     void testComponents(WebDriver driver, URL url) {
         driver.get(String.format("%s/components", url));
 
