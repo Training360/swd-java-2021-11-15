@@ -4,6 +4,9 @@ import extension.SeleniumTest;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -47,6 +50,28 @@ class LocationsTest {
                 .clickOnModifySubmitButton()
                 .messageIs("Location has been modified");
 
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"Home", "Work", "Hobby", "School"})
+    void testCreateWithData(String name, WebDriver driver) {
+        new LocationPage(driver)
+                .go()
+                .clickOnCreateLocation()
+                .enterLocationData(name, "1,1")
+                .clickOnSubmitButton()
+                .messageIs("Location has been created");
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/locations.csv", numLinesToSkip = 1)
+    void testCreateWithData(String name, String lat, String lon, WebDriver driver) {
+        new LocationPage(driver)
+                .go()
+                .clickOnCreateLocation()
+                .enterLocationData(name, lat + "," + lon)
+                .clickOnSubmitButton()
+                .messageIs("Location has been created");
     }
 
 
